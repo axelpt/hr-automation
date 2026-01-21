@@ -18,11 +18,13 @@ st.set_page_config(page_title="Workflow Uploader", page_icon="📂")
 st.title("📂 Upload to Workflow")
 
 # --- Authentication (Optional/Simple) ---
-# If you want to password protect this tool, uncomment below:
-# password = st.text_input("Access Password", type="password")
-# if password != st.secrets.get("AUTH_PASSWORD", "admin"):
-#     st.warning("Please enter the correct password.")
-#     st.stop()
+# --- Authentication ---
+password = st.text_input("Access Password", type="password")
+auth_pass = get_secret("general", "auth_password") or "admin" # Default to 'admin' if not set
+
+if password != auth_pass:
+    st.warning("Please enter the correct password to access this tool.")
+    st.stop()
 
 
 # --- Validation ---
